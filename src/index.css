@@ -1,0 +1,225 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+#page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+#box {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 1.25rem 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  color: #fff;
+}
+
+
+#searchBar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+
+#searchBox {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  min-width: 0; 
+}
+
+#searchBox::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#searchBox:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+#searchButton {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.1s;
+}
+
+#searchButton:hover { 
+  background: rgba(255, 255, 255, 0.25); 
+}
+#searchButton:active { 
+  transform: scale(0.94); 
+}
+
+#weatherBox {
+  text-align: center;
+}
+
+#weatherBox h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+}
+
+#weatherBox > img {
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  margin: 0.2rem 0;
+}
+
+.temp {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 0.2rem;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+#forecast {
+  display: flex;
+  gap: 6px;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  width: 100%;
+  overflow: hidden;
+}
+
+.forecast-item {
+  flex: 1 1 0;       
+  min-width: 0;      
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0.5rem 0.2rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: background 0.2s;
+}
+
+.forecast-item:hover { 
+  background: rgba(255, 255, 255, 0.14); 
+}
+
+.forecast-item p {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.65);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
+}
+
+.forecast-item p:last-child {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.forecast-item img {
+  width: 32px;
+  height: 32px;
+  filter: none;
+  margin: 0;
+}
+
+
+#weatherBox > p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+p[style*="color: red"] {
+  color: #ff8080 !important;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+
+@media (max-width: 420px) {
+  #box {
+    padding: 1rem 1rem;
+    border-radius: 18px;
+  }
+
+  .temp { 
+    font-size: 2.5rem; 
+  }
+
+  #weatherBox h2 { 
+    font-size: 1.3rem; 
+  }
+
+  .forecast-item {
+    gap: 1px;
+    padding: 0.4rem 0.1rem;
+    border-radius: 10px;
+  }
+
+  .forecast-item p { 
+    font-size: 0.65rem; 
+  }
+  .forecast-item p:last-child { 
+    font-size: 0.75rem; 
+  }
+  .forecast-item img { 
+    width: 26px; 
+    height: 26px; 
+  }
+}
