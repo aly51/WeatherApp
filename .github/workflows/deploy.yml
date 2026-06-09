@@ -2,12 +2,17 @@ name: Deploy Vite App to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -21,27 +26,44 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Verify secret exists
+        env:
+          VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
+        run: |
+          if [ -z "$VITE_APP_ID" ]; then
+            echo "VITE_APP_ID is EMPTY"
+            exit 1
+          else
+            echo "VITE_APP_ID is PRESENT"
+          fi
 
       - name: Build project
+        env:
+          VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
         run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ./dist
 
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
+    runs-on: ubuntu-latest
+    needs: build
+
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
